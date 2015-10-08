@@ -1,0 +1,97 @@
+public class Solution {
+    public int romanToInt(String s) {
+        
+        int thousand = 0, hundred = 0, ten = 0, one = 0;
+        
+        int index = 0;
+        
+        //1000
+        while (index < s.length() && s.charAt(index) == 'M') {
+            thousand++;
+            index++;
+        }
+        
+        //100
+        if (index < s.length() && s.charAt(index) == 'C') {
+            index++;
+            if (index < s.length() && s.charAt(index) == 'D') {
+                index++;
+                hundred += 4;
+            } else if (index < s.length() && s.charAt(index) == 'M'){
+                index++;
+                hundred += 9;
+            } else {
+                hundred++;
+                while (index < s.length() && s.charAt(index) == 'C') {
+                    hundred++;
+                    index++;
+                }
+            }
+        }
+        
+        if (index < s.length() && s.charAt(index) == 'D') {
+            index++;
+            hundred+=5;
+            while (index < s.length() && s.charAt(index) == 'C') {
+                hundred++;
+                index++;
+            }            
+        }
+        
+        //10
+        if (index < s.length() && s.charAt(index) == 'X') {
+            index++;
+            if (index < s.length() && s.charAt(index) == 'L') {
+                index++;
+                ten += 4;
+            } else if (index < s.length() && s.charAt(index) == 'C'){
+                index++;
+                ten += 9;
+            } else {
+                ten++;
+                while (index < s.length() && s.charAt(index) == 'X') {
+                    ten++;
+                    index++;
+                }
+            }
+        }
+        
+        if (index < s.length() && s.charAt(index) == 'L') {
+            index++;
+            ten+=5;
+            while (index < s.length() && s.charAt(index) == 'X') {
+                ten++;
+                index++;
+            }            
+        }
+        
+        //1
+        if (index < s.length() && s.charAt(index) == 'I') {
+            index++;
+            if (index < s.length() && s.charAt(index) == 'V') {
+                index++;
+                one += 4;
+            } else if (index < s.length() && s.charAt(index) == 'X'){
+                index++;
+                one += 9;
+            } else {
+                one++;
+                while (index < s.length() && s.charAt(index) == 'I') {
+                    one++;
+                    index++;
+                }
+            }
+        }
+        
+        if (index < s.length() && s.charAt(index) == 'V') {
+            index++;
+            one+=5;
+            while (index < s.length() && s.charAt(index) == 'I') {
+                one++;
+                index++;
+            }            
+        }
+        
+        return (thousand * 1000 + hundred * 100 + ten * 10 + one);
+    }
+}
